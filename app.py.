@@ -1,0 +1,80 @@
+import streamlit as st
+from main import clasificar_humedad
+
+st.set_page_config(
+    page_title="Clasificador de Humedades",
+    page_icon="💧",
+    layout="centered"
+)
+
+st.title("💧 Clasificador de Humedades")
+st.subheader("Sistema de diagnóstico para problemas edilicios")
+
+st.divider()
+
+descripcion = st.text_area(
+    "📝 Describí el problema:",
+    placeholder="Ej: Tengo manchas negras y hongos cerca del ventanal..."
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    lugar = st.selectbox(
+        "📍 Lugar físico:",
+        ["", "Techo / Azotea / Terraza", "Baño", "Cocina",
+         "Lavadero", "Sótano / Subsuelo", "Planta baja", "Otro"]
+    )
+    zona_climatica = st.selectbox(
+        "🌍 Zona climática:",
+        ["", "Húmeda", "Tropical", "Costera",
+         "Fría", "Andina", "Patagónica",
+         "Seca", "Árida", "Desértica"]
+    )
+
+with col2:
+    cerca_del_mar = st.radio(
+        "🌊 ¿Cerca del mar?",
+        ["No", "Sí"]
+    )
+
+st.divider()
+
+if st.button("🔍 Diagnosticar", use_container_width=True):
+
+    if not descripcion.strip():
+        st.warning("⚠️ Por favor describí el problema antes de continuar.")
+    else:
+        resultado = clasificar_humedad(
+            descripcion=descripcion,
+            lugar=lugar.lower(),
+            zona_climatica=zona_climatica.lower(),
+            cerca_del_mar=(cerca_del_mar == "Sí")
+        )
+
+        st.success("✅ Diagnóstico completado")
+        st.divider()
+
+        st.subheader("🔎 Diagnóstico")
+        for item in resultado["diagnostico"]:
+            with st.expander(f"📌 {item['categoria']}"):
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.markdown(f"**Urgencia:** {item['urgencia']}")
+                    st.markdown(f"**Presupuesto:** {item['presupuesto']}")
+                with col_b:
+                    st.markdown(f"**Solución:** {item['solucion']}")
+                if item["materiales"]:
+                    st.markdown("**Materiales recomendados:**")
+                    for mat in item["materiales"]:
+                        st.markdown(f"- {mat}")
+
+        alertas = (resultado["alertas_zona"] +
+                   resultado["alertas_lugar"] +
+                   resultado["alertas_salinidad"])
+
+        if alertas:
+            st.divider()
+            st.subheader("⚠️ Alertas adicionales")
+            for alerta in alertas:
+                st.warning(alerta)
