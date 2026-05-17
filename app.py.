@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 from main import clasificar_humedad
 
 st.set_page_config(
@@ -7,13 +8,20 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("💧 Clasificador de Humedades")
-st.subheader("Sistema de diagnóstico para problemas edilicios")
+if "historial" not in st.session_state:
+    st.session_state.historial = []
 
+st.title("💧 Clasificador de Humedades")
+st.subheader("Sistema de diagnostico para problemas edilicios")
 st.divider()
 
+with st.expander("🧑 Datos del cliente (opcional)"):
+    nombre_cliente = st.text_input("Nombre del cliente:")
+    direccion = st.text_input("Direccion:")
+    telefono = st.text_input("Telefono:")
+
 descripcion = st.text_area(
-    "📝 Describí el problema:",
+    "📝 Describe el problema:",
     placeholder="Ej: Tengo manchas negras y hongos cerca del ventanal..."
 )
 
@@ -21,49 +29,71 @@ col1, col2 = st.columns(2)
 
 with col1:
     lugar = st.selectbox(
-        "📍 Lugar físico:",
-        ["", "Techo / Azotea / Terraza", "Baño", "Cocina",
-         "Lavadero", "Sótano / Subsuelo", "Planta baja", "Otro"]
+        "📍 Lugar fisico:",
+        ["", "Techo / Azotea / Terraza", "Bano", "Cocina",
+         "Lavadero", "Sotano / Subsuelo", "Planta baja",
+         "Medianera", "Exterior / Terreno", "Otro"]
     )
     zona_climatica = st.selectbox(
-        "🌍 Zona climática:",
-        ["", "Húmeda", "Tropical", "Costera",
-         "Fría", "Andina", "Patagónica",
-         "Seca", "Árida", "Desértica"]
+        "🌍 Zona climatica:",
+        ["", "Humeda", "Tropical", "Costera",
+         "Fria", "Andina", "Patagonica",
+         "Seca", "Arida", "Desertica"]
     )
 
 with col2:
-    cerca_del_mar = st.radio(
-        "🌊 ¿Cerca del mar?",
-        ["No", "Sí"]
-    )
+    cerca_del_mar = st.radio("🌊 Cerca del mar?", ["No", "Si"])
+
+observaciones = st.text_area(
+    "🔧 Observaciones del tecnico (opcional):",
+    placeholder="Ej: Se observo eflorescencia en la base del muro..."
+)
 
 st.divider()
 
-if st.button("🔍 Diagnosticar", use_container_width=True):
+COLORES = {
+    "Urgente": "🔴",
+    "Alta": "🟠",
+    "Media": "🟡",
+    "Baja": "🟢",
+    "A evaluar": "⚪"
+}
 
+if st.button("🔍 Diagnosticar", use_container_width=True):
     if not descripcion.strip():
-        st.warning("⚠️ Por favor describí el problema antes de continuar.")
+        st.warning("Por favor describe el problema antes de continuar.")
     else:
         resultado = clasificar_humedad(
             descripcion=descripcion,
             lugar=lugar.lower(),
             zona_climatica=zona_climatica.lower(),
-            cerca_del_mar=(cerca_del_mar == "Sí")
+            cerca_del_mar=(cerca_del_mar == "Si")
         )
 
-        st.success("✅ Diagnóstico completado")
+        if len(st.session_state.historial) >= 20:
+            st.session_state.historial.pop(0)
+
+        st.session_state.historial.append({
+            "fecha": datetime.now().strftime("%d/%m/%Y %H:%M"),
+            "cliente": nombre_cliente or "Sin nombre",
+            "descripcion": descripcion,
+            "resultado": resultado,
+            "observaciones": observaciones
+        })
+
+        st.success("Diagnostico completado")
         st.divider()
 
-        st.subheader("🔎 Diagnóstico")
+        st.subheader("🔎 Diagnostico")
         for item in resultado["diagnostico"]:
-            with st.expander(f"📌 {item['categoria']}"):
+            color = COLORES.get(item["urgencia"], "⚪")
+            with st.expander(f"📌 {item['categoria']} — {color} {item['urgencia']}"):
                 col_a, col_b = st.columns(2)
                 with col_a:
-                    st.markdown(f"**Urgencia:** {item['urgencia']}")
+                    st.markdown(f"**Urgencia:** {color} {item['urgencia']}")
                     st.markdown(f"**Presupuesto:** {item['presupuesto']}")
                 with col_b:
-                    st.markdown(f"**Solución:** {item['solucion']}")
+                    st.markdown(f"**Solucion:** {item['solucion']}")
                 if item["materiales"]:
                     st.markdown("**Materiales recomendados:**")
                     for mat in item["materiales"]:
@@ -78,3 +108,63 @@ if st.button("🔍 Diagnosticar", use_container_width=True):
             st.subheader("⚠️ Alertas adicionales")
             for alerta in alertas:
                 st.warning(alerta)
+
+        if observaciones.strip():
+            st.divider()
+            st.subheader("🔧 Observaciones del tecnico")
+            st.info(observaciones)
+
+        st.divider()
+        fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
+        reporte = f"""
+CLASIFICADOR DE HUMEDADES - INFORME TECNICO
+============================================
+Fecha: {fecha}
+Cliente: {nombre_cliente or 'No especificado'}
+Direccion: {direccion or 'No especificada'}
+Telefono: {telefono or 'No especificado'}
+
+DESCRIPCION DEL PROBLEMA:
+{descripcion}
+
+DIAGNOSTICO:
+"""
+        for item in resultado["diagnostico"]:
+            reporte += f"""
+- {item['categoria']}
+  Urgencia: {item['urgencia']}
+  Solucion: {item['solucion']}
+  Presupuesto: {item['presupuesto']}
+  Materiales: {', '.join(item['materiales'])}
+"""
+        if alertas:
+            reporte += "\nALERTAS:\n"
+            for a in alertas:
+                reporte += f"- {a}\n"
+
+        if observaciones.strip():
+            reporte += f"\nOBSERVACIONES DEL TECNICO:\n{observaciones}\n"
+
+        st.download_button(
+            label="📄 Descargar informe",
+            data=reporte,
+            file_name=f"informe_{datetime.now().strftime('%Y%m%d')}.txt",
+            mime="text/plain"
+        )
+
+if st.session_state.historial:
+    st.divider()
+    st.subheader("📋 Historial de diagnosticos")
+
+    if st.button("🗑️ Limpiar historial"):
+        st.session_state.historial = []
+        st.rerun()
+
+    for i, item in enumerate(reversed(st.session_state.historial)):
+        with st.expander(f"#{len(st.session_state.historial)-i} — {item['fecha']} — {item['cliente']}"):
+            st.markdown(f"**Descripcion:** {item['descripcion']}")
+            for diag in item['resultado']['diagnostico']:
+                color = COLORES.get(diag['urgencia'], "⚪")
+                st.markdown(f"- {color} **{diag['categoria']}** — {diag['urgencia']}")
+            if item['observaciones']:
+                st.markdown(f"**Observaciones:** {item['observaciones']}")
