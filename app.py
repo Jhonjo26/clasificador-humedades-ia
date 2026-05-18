@@ -513,7 +513,7 @@ if diagnosticar:
         st.stop()
 
     # ── Clasificación ──
-    try
+    try:
            resultados = clasificar_humedad(descripcion)
         
 
