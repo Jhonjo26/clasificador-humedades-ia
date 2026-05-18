@@ -513,13 +513,9 @@ if diagnosticar:
         st.stop()
 
     # ── Clasificación ──
-    try:
-        resultados = clasificar_humedad(
-            descripcion=descripcion,
-            lugar=lugar,
-            zona=zona,
-            mar=(mar == "si"),
-        )
+    try
+           resultados = clasificar_humedad(descripcion)
+        
 
         if not resultados:
             st.markdown("""
