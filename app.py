@@ -52,7 +52,6 @@ st.markdown("""
   }
   .hero-logo span { color: var(--naranja-claro); font-weight: 400; font-size: 1rem; }
   .hero-eslogan {
-    font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 300;
     color: var(--texto-suave);
@@ -65,8 +64,6 @@ st.markdown("""
     border-radius: var(--radio);
     padding: 1.4rem 1.6rem;
     margin-bottom: 1.8rem;
-    position: relative;
-    overflow: hidden;
   }
   .bienvenida-titulo {
     font-family: 'Syne', sans-serif;
@@ -103,6 +100,12 @@ st.markdown("""
     border-radius: var(--radio) !important;
     color: var(--texto) !important;
   }
+  .stSelectbox > div > div {
+    background-color: rgba(15,52,96,0.6) !important;
+    border: 1px solid rgba(232,108,26,0.3) !important;
+    border-radius: var(--radio) !important;
+    color: var(--texto) !important;
+  }
   .stButton > button {
     background: linear-gradient(135deg, var(--naranja), #C4571A) !important;
     color: white !important;
@@ -111,6 +114,7 @@ st.markdown("""
     font-family: 'Syne', sans-serif !important;
     font-weight: 700 !important;
     width: 100% !important;
+    padding: 0.7rem 1.5rem !important;
     box-shadow: 0 4px 15px rgba(232,108,26,0.35) !important;
   }
   .resultado-card {
@@ -123,15 +127,14 @@ st.markdown("""
   .resultado-alta { background: rgba(232,108,26,0.12); border-color: var(--alta); }
   .resultado-media { background: rgba(245,197,24,0.1); border-color: var(--media); }
   .resultado-baja { background: rgba(76,175,80,0.1); border-color: var(--baja); }
-  .resultado-id { font-size: 0.65rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.15em; }
-  .resultado-titulo { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--texto); margin-bottom: 0.6rem; }
-  .badge-urgencia { display: inline-block; border-radius: 20px; padding: 0.2rem 0.75rem; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.8rem; }
-  .badge-urgente { background: rgba(255,76,76,0.25); color: #FF8080; }
-  .badge-alta { background: rgba(232,108,26,0.25); color: var(--naranja-claro); }
-  .badge-media { background: rgba(245,197,24,0.2); color: #F5E06A; }
-  .badge-baja { background: rgba(76,175,80,0.2); color: #80C883; }
-  .badge-evaluar { background: rgba(150,150,150,0.2); color: #AAAAAA; }
-  .resultado-detalle { font-size: 0.85rem; color: var(--texto-suave); line-height: 1.6; }
+  .resultado-evaluar { background: rgba(150,150,150,0.1); border-color: #888; }
+  .resultado-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--texto);
+    margin-bottom: 0.4rem;
+  }
   .resultado-presupuesto {
     display: inline-block;
     font-family: 'Syne', sans-serif;
@@ -141,18 +144,30 @@ st.markdown("""
     background: rgba(232,108,26,0.15);
     border-radius: 8px;
     padding: 0.3rem 0.8rem;
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
   }
-  .error-card {
-    background: rgba(255,76,76,0.08);
-    border: 1px solid rgba(255,76,76,0.3);
-    border-radius: var(--radio);
-    padding: 1.2rem 1.4rem;
-    margin: 0.8rem 0;
+  .badge-urgencia {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
   }
-  .error-aviso { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: #FF8080; margin-bottom: 0.3rem; }
-  .error-contexto { font-size: 0.82rem; color: var(--texto-suave); margin-bottom: 0.5rem; }
-  .error-solucion { font-size: 0.82rem; color: var(--naranja-claro); font-weight: 500; }
+  .badge-urgente { background: rgba(255,76,76,0.25); color: #FF8080; }
+  .badge-alta { background: rgba(232,108,26,0.25); color: var(--naranja-claro); }
+  .badge-media { background: rgba(245,197,24,0.2); color: #F5E06A; }
+  .badge-baja { background: rgba(76,175,80,0.2); color: #80C883; }
+  .badge-evaluar { background: rgba(150,150,150,0.2); color: #AAAAAA; }
+  .alerta-item {
+    background: rgba(232,108,26,0.1);
+    border: 1px solid rgba(232,108,26,0.3);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--naranja-claro);
+  }
   .historial-item {
     background: rgba(15,52,96,0.4);
     border: 1px solid rgba(232,108,26,0.15);
@@ -183,26 +198,20 @@ if "diagnosticos_total" not in st.session_state:
 if "primer_uso" not in st.session_state:
     st.session_state.primer_uso = True
 
+COLORES = {
+    "Urgente": "urgente",
+    "Alta": "alta",
+    "Media": "media",
+    "Baja": "baja",
+    "A evaluar": "evaluar",
+}
+
 
 def color_clase(urgencia):
-    u = urgencia.lower()
-    if "urgente" in u:
-        return "urgente"
-    if "alta" in u:
-        return "alta"
-    if "media" in u:
-        return "media"
-    if "baja" in u:
-        return "baja"
-    return "evaluar"
+    return COLORES.get(urgencia, "evaluar")
 
 
-def badge_html(urgencia):
-    clase = color_clase(urgencia)
-    return f'<span class="badge-urgencia badge-{clase}">{urgencia}</span>'
-
-
-def generar_informe(cliente, resultados, observaciones):
+def generar_informe(cliente, resultado, observaciones):
     lineas = [
         "=" * 48,
         "         INFORME CASASANA.A.I",
@@ -213,13 +222,29 @@ def generar_informe(cliente, resultados, observaciones):
         f"Telefono  : {cliente.get('telefono', '')}",
         f"Fecha     : {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}",
         "=" * 48,
+        "\nDIAGNOSTICO:",
     ]
-    for i, r in enumerate(resultados, 1):
+    diagnostico = resultado.get("diagnostico", [])
+    if isinstance(diagnostico, dict):
+        diagnostico = [diagnostico]
+    for item in diagnostico:
         lineas += [
-            f"\nDIAGNOSTICO {i}: {r.get('categoria', '')}",
-            f"Urgencia   : {r.get('urgencia', '')}",
-            f"Presupuesto: {r.get('presupuesto', '')}",
+            f"\n- {item.get('categoria', '')}",
+            f"  Urgencia  : {item.get('urgencia', '')}",
+            f"  Solucion  : {item.get('solucion', '')}",
+            f"  Presupuesto: {item.get('presupuesto', '')}",
         ]
+        if item.get("materiales"):
+            lineas.append(f"  Materiales: {', '.join(item['materiales'])}")
+    alertas = (
+        resultado.get("alertas_zona", []) +
+        resultado.get("alertas_lugar", []) +
+        resultado.get("alertas_salinidad", [])
+    )
+    if alertas:
+        lineas += ["\nALERTAS:"]
+        for a in alertas:
+            lineas.append(f"  {a}")
     if observaciones:
         lineas += ["\n" + "-" * 48, "OBSERVACIONES:", observaciones]
     lineas += ["", "=" * 48, "CasaSana.a.i"]
@@ -247,9 +272,8 @@ if st.session_state.primer_uso:
 </div>
 """, unsafe_allow_html=True)
 
-total = st.session_state.diagnosticos_total
-if total > 0:
-    st.info(f"Diagnosticos realizados en esta sesion: {total}")
+if st.session_state.diagnosticos_total > 0:
+    st.info(f"Diagnosticos en esta sesion: {st.session_state.diagnosticos_total}")
 
 st.markdown('<div class="seccion-label">Datos del cliente</div>', unsafe_allow_html=True)
 col1, col2 = st.columns([3, 2])
@@ -266,6 +290,26 @@ descripcion = st.text_area(
     height=110,
 )
 
+st.markdown('<div class="seccion-label">Contexto del inmueble</div>', unsafe_allow_html=True)
+col3, col4 = st.columns(2)
+with col3:
+    lugar = st.selectbox("Lugar fisico afectado", [
+        "no especificado", "techo / azotea / terraza", "bano", "cocina",
+        "lavadero", "sotano / subsuelo", "planta baja", "medianera",
+        "exterior / terreno", "otro"
+    ])
+with col4:
+    zona_climatica = st.selectbox("Zona climatica", [
+        "no especificada", "humeda", "tropical", "costera",
+        "fria", "andina", "patagonica", "seca", "arida", "desertica"
+    ])
+
+cerca_del_mar = st.radio(
+    "El inmueble esta cerca del mar?",
+    ["No", "Si"],
+    horizontal=True
+)
+
 st.markdown('<div class="seccion-label">Observaciones del tecnico</div>', unsafe_allow_html=True)
 observaciones = st.text_area(
     "Notas internas (no se muestran al cliente)",
@@ -278,56 +322,64 @@ diagnosticar = st.button("Diagnosticar problema")
 
 if diagnosticar:
     st.session_state.primer_uso = False
-    errores = []
-    if not nombre.strip():
-        errores.append("Falta el nombre del cliente.")
     if not descripcion.strip():
-        errores.append("Falta describir el problema.")
-    if errores:
-        for e in errores:
-            st.markdown(f"""
-<div class="error-card">
-  <div class="error-aviso">Falta un dato</div>
-  <div class="error-contexto">Para darte un diagnostico preciso necesitamos un dato mas.</div>
-  <div class="error-solucion">{e}</div>
-</div>
-""", unsafe_allow_html=True)
+        st.warning("Por favor describi el problema antes de continuar.")
         st.stop()
+
     try:
-        resultados = clasificar_humedad(descripcion)
-        if not resultados:
-            st.markdown("""
-<div class="error-card">
-  <div class="error-aviso">No pudimos identificar el problema</div>
-  <div class="error-contexto">La descripcion no coincidio con nuestras categorias conocidas.</div>
-  <div class="error-solucion">Agrega mas detalles: donde aparece, desde cuando, hay olor?</div>
-</div>
-""", unsafe_allow_html=True)
-            st.stop()
+        resultado = clasificar_humedad(
+            descripcion=descripcion,
+            lugar=lugar.lower(),
+            zona_climatica=zona_climatica.lower(),
+            cerca_del_mar=(cerca_del_mar == "Si")
+        )
+
         st.session_state.diagnosticos_total += 1
         cliente_data = {"nombre": nombre, "direccion": direccion, "telefono": telefono}
+
         st.markdown("---")
-        for r in resultados:
-            clase = color_clase(r.get("urgencia", ""))
+
+        diagnostico = resultado.get("diagnostico", [])
+        if isinstance(diagnostico, dict):
+            diagnostico = [diagnostico]
+
+        for item in diagnostico:
+            clase = color_clase(item.get("urgencia", "A evaluar"))
             st.markdown(f"""
 <div class="resultado-card resultado-{clase}">
-  <div class="resultado-id">{r.get('id', '')}</div>
-  <div class="resultado-titulo">{r.get('categoria', '')}</div>
-  {badge_html(r.get('urgencia', ''))}
-  <div class="resultado-detalle">{r.get('descripcion', '')}</div>
-  <div class="resultado-presupuesto">{r.get('presupuesto', 'A determinar')}</div>
+  <div class="resultado-titulo">{item.get('categoria', '')}</div>
+  <span class="badge-urgencia badge-{clase}">{item.get('urgencia', 'A evaluar')}</span><br>
+  <div style="font-size:0.85rem;color:var(--texto-suave);margin-top:0.4rem">{item.get('solucion', '')}</div>
+  <div class="resultado-presupuesto">{item.get('presupuesto', 'A determinar')}</div>
 </div>
 """, unsafe_allow_html=True)
+            if item.get("materiales"):
+                st.markdown("**Materiales recomendados:**")
+                for mat in item["materiales"]:
+                    st.markdown(f"- {mat}")
+
+        alertas = (
+            resultado.get("alertas_zona", []) +
+            resultado.get("alertas_lugar", []) +
+            resultado.get("alertas_salinidad", [])
+        )
+        if alertas:
+            st.markdown("---")
+            st.markdown('<div class="seccion-label">Alertas adicionales</div>', unsafe_allow_html=True)
+            for alerta in alertas:
+                st.markdown(f'<div class="alerta-item">{alerta}</div>', unsafe_allow_html=True)
+
         entrada = {
             "hora": datetime.datetime.now().strftime("%H:%M"),
-            "nombre": nombre,
-            "categoria": resultados[0].get("categoria", ""),
-            "urgencia": resultados[0].get("urgencia", ""),
-            "informe": generar_informe(cliente_data, resultados, observaciones),
+            "nombre": nombre or "Sin nombre",
+            "categoria": diagnostico[0].get("categoria", "") if diagnostico else "",
+            "urgencia": diagnostico[0].get("urgencia", "") if diagnostico else "",
+            "informe": generar_informe(cliente_data, resultado, observaciones),
         }
         st.session_state.historial.insert(0, entrada)
         if len(st.session_state.historial) > 20:
             st.session_state.historial.pop()
+
         st.markdown("<br>", unsafe_allow_html=True)
         st.download_button(
             label="Descargar informe completo",
@@ -335,14 +387,9 @@ if diagnosticar:
             file_name=f"CasaSana_{nombre.replace(' ', '_')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}.txt",
             mime="text/plain",
         )
+
     except Exception as e:
-        st.markdown("""
-<div class="error-card">
-  <div class="error-aviso">Algo salio mal en el sistema</div>
-  <div class="error-contexto">Ocurrio un error inesperado. Intentalo de nuevo.</div>
-  <div class="error-solucion">Si persiste, contacta soporte.</div>
-</div>
-""", unsafe_allow_html=True)
+        st.error("Algo salio mal. Intenta de nuevo.")
         with st.expander("Log tecnico"):
             st.code(str(e))
 
