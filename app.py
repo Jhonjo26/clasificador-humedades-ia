@@ -43,12 +43,13 @@ st.markdown("""
   }
   .hero-logo {
     font-family: 'Syne', sans-serif;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: var(--naranja);
     letter-spacing: -0.5px;
     line-height: 1;
     margin-bottom: 0.3rem;
+    white-space: nowrap;
   }
   .hero-logo span { color: var(--naranja-claro); font-weight: 400; font-size: 1rem; }
   .hero-eslogan {
@@ -105,6 +106,11 @@ st.markdown("""
     border: 1px solid rgba(232,108,26,0.3) !important;
     border-radius: var(--radio) !important;
     color: var(--texto) !important;
+  }
+  .stTextInput label, .stTextArea label, .stSelectbox label, .stRadio label {
+    color: #F0EBE3 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
   }
   .stButton > button {
     background: linear-gradient(135deg, var(--naranja), #C4571A) !important;
