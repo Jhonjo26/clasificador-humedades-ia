@@ -107,6 +107,31 @@ st.markdown("""
     border-radius: var(--radio) !important;
     color: var(--texto) !important;
   }
+  .stSelectbox > div > div > div {
+    background-color: #0F3460 !important;
+    color: #F0EBE3 !important;
+  }
+  [data-baseweb="select"] * {
+    background-color: #0F3460 !important;
+    color: #F0EBE3 !important;
+  }
+  [data-baseweb="popover"] {
+    background-color: #0F3460 !important;
+  }
+  [data-baseweb="menu"] {
+    background-color: #0F3460 !important;
+  }
+  [data-baseweb="option"] {
+    background-color: #0F3460 !important;
+    color: #F0EBE3 !important;
+  }
+  [data-baseweb="option"]:hover {
+    background-color: rgba(232,108,26,0.3) !important;
+  }
+  li[role="option"] {
+    background-color: #0F3460 !important;
+    color: #F0EBE3 !important;
+  }
   .stTextInput label, .stTextArea label, .stSelectbox label, .stRadio label {
     color: #F0EBE3 !important;
     font-size: 0.95rem !important;
