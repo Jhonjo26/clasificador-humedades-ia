@@ -194,6 +194,15 @@ st.markdown("""
   #MainMenu { visibility: hidden; }
   footer { visibility: hidden; }
   header { visibility: hidden; }
+  /* Visibilidad global */
+  p, li, span, div { color: var(--texto); }
+  .stMarkdown p { color: #F0EBE3 !important; }
+  .stMarkdown li { color: #F0EBE3 !important; }
+  .stMarkdown strong { color: #F0EBE3 !important; }
+  .stAlert { background: rgba(15,52,96,0.6) !important; color: #F0EBE3 !important; }
+  .stRadio > div > label { color: #F0EBE3 !important; font-size:0.95rem !important; }
+  [data-testid="stMarkdownContainer"] p { color: #F0EBE3 !important; }
+  [data-testid="stMarkdownContainer"] li { color: #F0EBE3 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -360,9 +369,8 @@ if diagnosticar:
 </div>
 """, unsafe_allow_html=True)
             if item.get("materiales"):
-                st.markdown("**Materiales recomendados:**")
-                for mat in item["materiales"]:
-                    st.markdown(f"- {mat}")
+                mats = "".join([f'<div style="color:#F0EBE3;font-size:0.85rem;padding:0.2rem 0">&#8226; {m}</div>' for m in item["materiales"]])
+                st.markdown(f'''<div style="margin-top:0.8rem;padding:0.8rem 1rem;background:rgba(15,52,96,0.5);border-radius:8px;border:1px solid rgba(232,108,26,0.2)"><div style="color:#F0EBE3;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">Materiales recomendados:</div>{mats}</div>''', unsafe_allow_html=True)
 
         alertas = (
             resultado.get("alertas_zona", []) +
