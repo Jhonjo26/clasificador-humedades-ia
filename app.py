@@ -322,7 +322,7 @@ with col1:
 with col2:
     telefono = st.text_input("Telefono", placeholder="Ej: 11-4567-8900")
 direccion = st.text_input("Direccion del inmueble", placeholder="Ej: Av. Corrientes 1234, CABA")
-st.write("📋 **Texto de Bienvenida:** Bienvenidos a un sistema funcional de soluciones para analizar, diagnosticar y lograr la erradicación definitiva de la humedad en casas, comercios y edificios.")
+
 st.markdown('<div class="seccion-label">Descripcion del problema</div>', unsafe_allow_html=True)
 descripcion = st.text_area(
     "Describi el problema con tus palabras",
