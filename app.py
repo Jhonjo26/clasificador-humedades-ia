@@ -1,5 +1,4 @@
-
-mlit as st
+import streamlit as st
 from main import clasificar_humedad
 import datetime
 
