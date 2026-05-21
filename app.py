@@ -303,8 +303,7 @@ if st.session_state.primer_uso:
 <div class="bienvenida-card">
   <div class="bienvenida-titulo">Bienvenido a CasaSana.a.i</div>
   <div class="bienvenida-texto">
-    Describi el problema de humedad de tu cliente con tus propias palabras
-    y en segundos recibes un diagnostico con categoria, urgencia y presupuesto estimado.
+    sistema de soluciones que analiza,diagnostica y erradica la humedad de casas,comercios y edificios.
   </div>
   <span class="bienvenida-beneficio">Diagnostico instantaneo</span>
   <span class="bienvenida-beneficio">Presupuesto estimado</span>
