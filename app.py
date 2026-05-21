@@ -333,7 +333,7 @@ st.markdown('<div class="seccion-label">Contexto del inmueble</div>', unsafe_all
 col3, col4 = st.columns(2)
 with col3:
     lugar = st.selectbox("Lugar fisico afectado", [
-        "no especificado", "techo / azotea / terraza", "bano", "cocina",
+        "no especificado", "techo / azotea / terraza", "baño", "cocina",
         "lavadero", "sotano / subsuelo", "planta baja", "medianera",
         "exterior / terreno", "otro"
     ])
