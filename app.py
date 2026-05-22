@@ -328,6 +328,10 @@ descripcion = st.text_area(
     placeholder="Ej: Hay manchas de humedad en el techo del bano y el piso se esta levantando...",
     height=110,
 )
+foto = None
+if descripcion.strip():
+    st.markdown('<div class="seccion-label">Foto del problema (opcional)</div>', unsafe_allow_html=True)
+    foto = st.file_uploader("Subí una foto", type=["jpg","jpeg","png"])
 
 st.markdown('<div class="seccion-label">Contexto del inmueble</div>', unsafe_allow_html=True)
 col3, col4 = st.columns(2)
