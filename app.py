@@ -425,7 +425,7 @@ if diagnosticar:
                 st.markdown("---")
                 st.markdown('<div class="seccion-label">Lo que detectamos en la imagen</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="alerta-item">{analisis_imagen}</div>', unsafe_allow_html=True)
-            st.markdown('<div style="margin-top:1rem;padding:0.8rem 1rem;background:rgba(232,108,26,0.08);border:1px solid rgba(232,108,26,0.25);border-radius:8px;font-size:0.82rem;color:#C9B99A">⚠️ Este diagnóstico es orientativo y está sujeto a la inspección final del técnico en el lugar.</div>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top:1rem;padding:0.8rem 1rem;background:rgba(232,108,26,0.08);border:1px solid rgba(232,108,26,0.25);border-radius:8px;font-size:0.82rem;color:#C9B99A">⚠️ Este diagnóstico es orientativo y está sujeto a la inspección final del técnico en el lugar.</div>', unsafe_allow_html=True)
         entrada = {
             "hora": datetime.datetime.now().strftime("%H:%M"),
             "nombre": nombre or "Sin nombre",
