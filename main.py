@@ -35,7 +35,7 @@ CATEGORIAS = [
     {
         "id": "CAT002",
         "keywords": ["cimiento", "zocalo", "piso", "subsuelo",
-                    "base", "napa"],
+                    "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
         "solucion": "Inyeccion de resinas o barrera quimica.",
         "urgencia": "Alta",
