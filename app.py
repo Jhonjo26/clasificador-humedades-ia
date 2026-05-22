@@ -305,7 +305,7 @@ if st.session_state.primer_uso:
   <div class="bienvenida-texto">
     sistema de soluciones que analiza,diagnostica y erradica la humedad de casas,comercios y edificios.
   </div>
-  <span class="bienvenida-beneficio">Diagnostico instantaneo por imagenes</span>
+  <span class="bienvenida-beneficio">Diagnostico instantaneo por imágenes</span>
   <span class="bienvenida-beneficio">Presupuesto estimado</span>
   <span class="bienvenida-beneficio">Informe descargable</span>
 </div>
@@ -324,7 +324,7 @@ direccion = st.text_input("Direccion del inmueble", placeholder="Ej: Av. Corrien
 
 st.markdown('<div class="seccion-label">Descripcion del problema</div>', unsafe_allow_html=True)
 descripcion = st.text_area(
-    "Describi el problema con tus palabras e imagines",
+    "Describi el problema con tus palabras e imágines",
     placeholder="Ej: Hay manchas de humedad en el techo del bano y el piso se esta levantando...",
     height=110,
 )
