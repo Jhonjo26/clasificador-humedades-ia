@@ -376,7 +376,18 @@ if diagnosticar:
             zona_climatica=zona_climatica.lower(),
             cerca_del_mar=(cerca_del_mar == "Si")
         )
-
+        analisis_imagen = ""
+        if foto is not None:
+            import google.generativeai as genai
+            from PIL import Image
+            genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            imagen = Image.open(foto)
+            respuesta = model.generate_content([
+                "Sos un experto en patologías de humedad edilicia. Describí en detalle lo que ves en esta imagen: tipo de humedad, superficie afectada, nivel de deterioro, colores, manchas, eflorescencias o daños visibles. Sé específico y técnico.",
+                imagen
+            ])
+            analisis_imagen = respuesta.text
         st.session_state.diagnosticos_total += 1
         cliente_data = {"nombre": nombre, "direccion": direccion, "telefono": telefono}
 
