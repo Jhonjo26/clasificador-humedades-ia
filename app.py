@@ -324,7 +324,7 @@ direccion = st.text_input("Direccion del inmueble", placeholder="Ej: Av. Corrien
 
 st.markdown('<div class="seccion-label">Descripcion del problema</div>', unsafe_allow_html=True)
 descripcion = st.text_area(
-    "Describi el problema con tus palabras e imágines",
+    "Describi el problema con tus palabras e imágenes",
     placeholder="Ej: Hay manchas de humedad en el techo del bano y el piso se esta levantando...",
     height=110,
 )
