@@ -3,11 +3,11 @@ from difflib import get_close_matches
 
 MAPA_LUGAR = {
     "techo / azotea / terraza": ["terraza", "azotea", "techo"],
-    "bano": ["bano"],
+    "baño": ["baño"],
     "cocina": ["cocina"],
     "lavadero": ["lavadero"],
     "sotano / subsuelo": ["sotano", "subsuelo"],
-    "planta baja": ["planta baja"],
+    "planta baja": ["planta baja","pasillo","habitación"],
     "medianera": ["medianera"],
     "exterior / terreno": ["jardin", "pileta", "drenaje", "terreno"],
     "otro": []
