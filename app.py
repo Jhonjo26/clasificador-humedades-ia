@@ -305,7 +305,7 @@ if st.session_state.primer_uso:
   <div class="bienvenida-texto">
     sistema de soluciones que analiza,diagnostica y erradica la humedad de casas,comercios y edificios.
   </div>
-  <span class="bienvenida-beneficio">Diagnostico instantaneo por imágenes</span>
+  <span class="bienvenida-beneficio">Diagnostico instantaneo</span>
   <span class="bienvenida-beneficio">Presupuesto estimado</span>
   <span class="bienvenida-beneficio">Informe descargable</span>
 </div>
