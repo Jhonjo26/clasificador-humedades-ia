@@ -125,18 +125,7 @@ CATEGORIAS = [
         "presupuesto": "$1000 - $4000 USD",
         "materiales": ["Bomba sumergible", "Drenaje frances",
                       "Geotextil"]
-    },{
-        "id": "CAT009",
-        "keywords": ["napa", "napa freatica", "tierra", "brota",
-                    "piso de tierra", "agua subterranea"],
-        "categoria": "Humedad por Napa Freatica Alta",
-        "solucion": "Drenaje perimetral profundo y bomba sumergible.",
-        "urgencia": "Alta",
-        "prioridad": 2,
-        "presupuesto": "$1000 - $4000 USD",
-        "materiales": ["Bomba sumergible", "Drenaje frances",
-                      "Geotextil"]
-    },
+    
 ]
 
 ORDEN_URGENCIA = {
