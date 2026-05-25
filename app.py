@@ -382,7 +382,7 @@ if diagnosticar:
             import google.generativeai as genai
             from PIL import Image
             genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-            model = genai.GenerativeModel("gemini-2.0-flash")
+            model = genai.GenerativeModel("gemini-2.5-flash")
             analisis_partes = []
             for foto in fotos:
                 imagen = Image.open(foto)
