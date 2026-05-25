@@ -125,7 +125,7 @@ CATEGORIAS = [
         "presupuesto": "$1000 - $4000 USD",
         "materiales": ["Bomba sumergible", "Drenaje frances",
                       "Geotextil"]
-    
+    },    
 ]
 
 ORDEN_URGENCIA = {
