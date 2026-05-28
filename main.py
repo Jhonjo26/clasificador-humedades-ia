@@ -22,8 +22,8 @@ MAPA_ZONA = {
 CATEGORIAS = [
     {
         "id": "CAT001",
-        "keywords": ["techo", "lluvia", "gotera", "cubierta",
-                    "teja", "canaleta", "terraza", "azotea"],
+        "keywords": ["techo", "lluvia", "chapas", "gotera", "cubierta",
+                    "teja", "cargas", "canaleta", "terraza", "azotea"],
         "categoria": "Filtracion por Cubierta / Techo",
         "solucion": "Impermeabilizacion y revision de cubierta.",
         "urgencia": "Alta",
@@ -34,7 +34,7 @@ CATEGORIAS = [
     },
     {
         "id": "CAT002",
-        "keywords": ["cimiento", "zocalo", "piso", "subsuelo",
+        "keywords": ["cimiento", "ceramica", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
         "solucion": "Inyeccion de resinas o barrera quimica.",
