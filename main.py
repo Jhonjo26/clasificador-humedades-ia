@@ -34,31 +34,31 @@ CATEGORIAS = [
     },
     {
         "id": "CAT002",
-        "keywords": ["cimiento", "ceramica", "zocalo", "piso", "subsuelo",
+        "keywords": ["cimiento", "loza", "ceramica", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
         "solucion": "Inyeccion de resinas o barrera quimica", "morteros hidrofugos", "electro-osmosis inalambrica.",
         "urgencia": "Alta",
         "prioridad": 2,
         "presupuesto": "$800 - $3000 USD",
-        "materiales": ["Resina epoxi", "Cristalizante",
+        "materiales": ["Resina epoxi", "cemento", "pasta hidrofuga", "Cristalizante",
                       "Barrera quimica inyectable"]
     },
     {
         "id": "CAT003",
-        "keywords": ["hongo", "ventanal", "ventana", "condensacion",
+        "keywords": ["hongo", "columna", "ventanal", "descascarado", "moho", "ventana", "pared interior", "condensacion",
                     "vapor", "bano", "cocina", "lavadero"],
         "categoria": "Humedad por Condensacion",
-        "solucion": "Ventilacion mejorada o placas termicas.",
+        "solucion": "Ventilacion mejorada o placas termicas", "picar-raspar pared", "acido muriatico rebajado".,
         "urgencia": "Media",
         "prioridad": 3,
         "presupuesto": "$200 - $800 USD",
-        "materiales": ["Placa de yeso hidrofugo", "Extractor de aire",
-                      "Pintura antihumedad"]
+        "materiales": ["Placa de yeso hidrofugo", "deshumidificador", "Extractor de aire",
+                      "Pintura antihumedad", "acidos curativos de patologias"]
     },
     {
         "id": "CAT004",
-        "keywords": ["cano", "tuberia", "perdida", "caneria rota"],
+        "keywords": ["cano", "tuberia", "perdida", "mancha con bordes", "crece sin lluvia", "caneria rota"],
         "categoria": "Humedad por Perdida en Caneria",
         "solucion": "Inspeccion y reparacion de canerias.",
         "urgencia": "Urgente",
@@ -93,7 +93,7 @@ CATEGORIAS = [
     },
     {
         "id": "CAT007",
-        "keywords": ["cloaca", "cloacal", "reflujo", "desague",
+        "keywords": ["cloaca", "cloacal", "brote", "piso de tierra", "reflujo", "desague",
                     "olor", "pozo"],
         "categoria": "Humedad por Reflujo Cloacal",
         "solucion": "Inspeccion de red cloacal y valvula antirretorno.",
