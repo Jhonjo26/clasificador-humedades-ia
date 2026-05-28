@@ -22,7 +22,7 @@ MAPA_ZONA = {
 CATEGORIAS = [
     {
         "id": "CAT001",
-        "keywords": ["techo", "lluvia", "chapas", "gotera", "cubierta",
+        "keywords": ["techo", "lluvia", "chapas", "gotera", "cielorazo","cubierta",
                     "teja", "cargas", "canaleta", "terraza", "azotea"],
         "categoria": "Filtracion por Cubierta / Techo",
         "solucion": "Impermeabilizacion y revision de cubierta.",
@@ -37,7 +37,7 @@ CATEGORIAS = [
         "keywords": ["cimiento", "ceramica", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
-        "solucion": "Inyeccion de resinas o barrera quimica.",
+        "solucion": "Inyeccion de resinas o barrera quimica", "morteros hidrofugos", "electro-osmosis inalambrica.",
         "urgencia": "Alta",
         "prioridad": 2,
         "presupuesto": "$800 - $3000 USD",
