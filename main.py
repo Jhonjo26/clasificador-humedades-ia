@@ -23,7 +23,7 @@ CATEGORIAS = [
     {
         "id": "CAT001",
         "keywords": ["techo", "lluvia", "chapas", "gotera", "cielorazo","cubierta",
-                    "teja", "cargas", "canaleta", "terraza", "azotea"],
+                    "teja", "cargas", "eflorecencia", "canaleta", ""terraza", "azotea"],
         "categoria": "Filtracion por Cubierta / Techo",
         "solucion": "Impermeabilizacion y revision de cubierta.",
         "urgencia": "Alta",
@@ -34,7 +34,7 @@ CATEGORIAS = [
     },
     {
         "id": "CAT002",
-        "keywords": ["cimiento", "loza", "ceramica", "zocalo", "piso", "subsuelo",
+        "keywords": ["cimiento", "loza", "eflorerescencia", "ceramica", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
         "solucion": "Inyeccion de resinas o barrera quimica", "morteros hidrofugos", "electro-osmosis inalambrica.",
