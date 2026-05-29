@@ -371,12 +371,6 @@ if diagnosticar:
         st.stop()
 
     try:
-        resultado = clasificar_humedad(
-            descripcion=descripcion,
-            lugar=lugar.lower(),
-            zona_climatica=zona_climatica.lower(),
-            cerca_del_mar=(cerca_del_mar == "Si")
-        )
         analisis_imagen = ""
         if fotos:
             import google.generativeai as genai
@@ -387,11 +381,17 @@ if diagnosticar:
             for foto in fotos:
                 imagen = Image.open(foto)
                 respuesta = model.generate_content([
-                    "Sos un experto en patologías de humedad edilicia. Describí en detalle lo que ves en esta imagen: tipo de humedad, superficie afectada, nivel de deterioro, colores, manchas, eflorescencias o daños visibles. Sé específico y técnico.",
+                    "Hola. Soy un inspector tecnico edilicio. Analiza la imagen e identifica: tipo de humedad, superficie afectada, nivel de deterioro, manchas, eflorescencia, salitre, hongos, goteras, grietas, oxido o condensacion visible. Respuesta tecnica y precisa, maximo 4 lineas.",
                     imagen
                 ])
                 analisis_partes.append(respuesta.text)
             analisis_imagen = " | ".join(analisis_partes)
+        resultado = clasificar_humedad(
+            descripcion=descripcion + " " + analisis_imagen,
+            lugar=lugar.lower(),
+            zona_climatica=zona_climatica.lower(),
+            cerca_del_mar=(cerca_del_mar == "Si")
+        )
         st.session_state.diagnosticos_total += 1
         cliente_data = {"nombre": nombre, "direccion": direccion, "telefono": telefono}
 
