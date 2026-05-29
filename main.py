@@ -37,7 +37,7 @@ CATEGORIAS = [
         "keywords": ["cimiento", "loza", "eflorerescencia", "ceramica", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
-        "solucion": "Inyeccion de resinas o Barrera quimica o Morteros hidrofugos o Electro-osmosis inalambrica.",
+        "solucion": "Inyeccion de resinas o Barrera quimica o Morteros hidrofugos",
         "urgencia": "Alta",
         "prioridad": 2,
         "presupuesto": "$800 - $3000 USD",
