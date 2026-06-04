@@ -385,7 +385,7 @@ if diagnosticar:
                     "Hola. Soy un inspector tecnico edilicio. Analiza la imagen e identifica: tipo de humedad, superficie afectada, nivel de deterioro, manchas, eflorescencia, salitre, hongos, goteras, grietas, oxido o condensacion visible. Respuesta tecnica y precisa, maximo 4 lineas.",
                     imagen
                 ])
-                )
+
                 analisis_partes.append(respuesta.text)
             analisis_imagen = " | ".join(analisis_partes)
         resultado = clasificar_humedad(
