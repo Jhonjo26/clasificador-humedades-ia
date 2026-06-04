@@ -379,10 +379,13 @@ if diagnosticar:
             analisis_partes = []
             for foto in fotos:
                 imagen = Image.open(foto)
-                respuesta = model.generate_content([
+                respuesta = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=[
                     "Hola. Soy un inspector tecnico edilicio. Analiza la imagen e identifica: tipo de humedad, superficie afectada, nivel de deterioro, manchas, eflorescencia, salitre, hongos, goteras, grietas, oxido o condensacion visible. Respuesta tecnica y precisa, maximo 4 lineas.",
                     imagen
                 ])
+                )
                 analisis_partes.append(respuesta.text)
             analisis_imagen = " | ".join(analisis_partes)
         resultado = clasificar_humedad(
