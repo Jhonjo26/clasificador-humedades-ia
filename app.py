@@ -373,18 +373,28 @@ if diagnosticar:
     try:
         analisis_imagen = ""
         if fotos:
-            from google import genai 
+            from google import genai
+            import time 
             from PIL import Image
             client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
             analisis_partes = []
             for foto in fotos:
                 imagen = Image.open(foto)
-                respuesta = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=[
-                    "Hola. Soy un inspector tecnico edilicio. Analiza la imagen e identifica: tipo de humedad, superficie afectada, nivel de deterioro, manchas, eflorescencia, salitre, hongos, goteras, grietas, oxido o condensacion visible. Respuesta tecnica y precisa, maximo 4 lineas.",
-                    imagen
-                ])
+                for intento in range(3):
+                    try:
+                        respuesta = client.models.generate_content(
+                            model="gemini-2.5-flash",
+                            contents=[
+                            "Hola. Soy un inspector tecnico edilicio. Analiza la imagen e identifica: tipo de humedad, superficie afectada, nivel de deterioro, manchas, eflorescencia, salitre, hongos, goteras, grietas, oxido o condensacion visible. Respuesta tecnica y precisa, maximo 4 lineas.",
+                            imagen
+                        ])
+                        break
+                    except Exception as e:
+                        if "429" in str(e) and intento < 2:
+                            time.sleep(5)
+                        else:
+                            raise
+    
 
                 analisis_partes.append(respuesta.text)
             analisis_imagen = " | ".join(analisis_partes)
