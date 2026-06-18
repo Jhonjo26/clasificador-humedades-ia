@@ -116,7 +116,7 @@ CATEGORIAS = [
                       "Pintura transpirable"]
     },{
         "id": "CAT009",
-        "keywords": ["napa", "napa freatica", "tierra", "brota",
+        "keywords": ["napa", "napa freatica", "tierra", "brota del piso",
                     "piso de tierra", "agua subterranea"],
         "categoria": "Humedad por Napa Freatica Alta",
         "solucion": "Drenaje perimetral profundo y bomba sumergible.",
