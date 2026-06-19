@@ -331,7 +331,12 @@ descripcion = st.text_area(
 fotos = []
 if descripcion.strip():
     st.markdown('<div class="seccion-label">Foto del problema (opcional)</div>', unsafe_allow_html=True)
-    fotos = st.file_uploader("Subí fotos del problema", type=["jpg","jpeg","png"], accept_multiple_files=True)
+    if "fotos_guardadas" not in st.session_state:
+    st.session_state.fotos_guardadas = []
+fotos_nuevas = st.file_uploader("Subi fotos del problema", type=["jpg","jpeg","png"], accept_multiple_files=True)
+if fotos_nuevas:
+    st.session_state.fotos_guardadas = fotos_nuevas
+fotos = st.session_state.fotos_guardadas 
     if fotos:
             st.success(f"✅ {len(fotos)} foto(s) recibida(s).")
 st.markdown('<div class="seccion-label">Contexto del inmueble</div>', unsafe_allow_html=True)
