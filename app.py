@@ -337,7 +337,7 @@ fotos_nuevas = st.file_uploader("Subi fotos del problema", type=["jpg","jpeg","p
 if fotos_nuevas:
     st.session_state.fotos_guardadas = fotos_nuevas
 fotos = st.session_state.fotos_guardadas 
-    if fotos:
+if fotos:
             st.success(f"✅ {len(fotos)} foto(s) recibida(s).")
 st.markdown('<div class="seccion-label">Contexto del inmueble</div>', unsafe_allow_html=True)
 col3, col4 = st.columns(2)
