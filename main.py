@@ -23,7 +23,7 @@ CATEGORIAS = [
     {
         "id": "CAT001",
         "keywords": ["techo", "lluvia", "chapas", "gotera", "cielorazo","cubierta",
-                    "teja", "cargas", "eflorecencia", "canaleta", "terraza", "azotea"],
+                    "teja", "cargas", "eflorecencia", "manchas oscuras", "canaleta", "terraza", "arriba", "azotea"],
         "categoria": "Filtracion por Cubierta / Techo",
         "solucion": "Impermeabilizacion y revision de cubierta.",
         "urgencia": "Alta",
@@ -34,7 +34,7 @@ CATEGORIAS = [
     },
     {
         "id": "CAT002",
-        "keywords": ["cimiento", "loza", "eflorerescencia", "ceramica", "zocalo", "piso", "subsuelo",
+        "keywords": ["cimiento", "loza", "eflorerescencia", "ceramica", "debajo", "zocalo", "piso", "subsuelo",
                     "base"],
         "categoria": "Humedad por Capilaridad (Cimientos)",
         "solucion": "Inyeccion de resinas o Barrera quimica o Morteros hidrofugos",
@@ -46,7 +46,7 @@ CATEGORIAS = [
     },
     {
         "id": "CAT003",
-        "keywords": ["hongo", "columna", "ventanal", "descascarado", "moho", "ventana", "pared interior", "condensacion",
+        "keywords": ["hongo", "columna", "ventanal", "moho", "pared interior", "condensacion",
                     "vapor", "bano", "cocina", "lavadero"],
         "categoria": "Humedad por Condensacion",
         "solucion": "Ventilacion mejorada o placas termicas y picar raspar pared mas acido muriatico rebajado.",
