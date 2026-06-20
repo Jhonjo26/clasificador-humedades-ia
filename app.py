@@ -370,6 +370,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 diagnosticar = st.button("Diagnosticar problema")
 
 if diagnosticar:
+    st.toast("Procesando diagnóstico...", icon="⏳")
     st.session_state.primer_uso = False
     if not descripcion.strip():
         st.warning("Por favor describi el problema antes de continuar.")
