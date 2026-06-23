@@ -22,7 +22,7 @@ MAPA_ZONA = {
 CATEGORIAS = [
     {
         "id": "CAT001",
-        "keywords": ["techo", "lluvia", "chapas", "gotera", "cielorazo","cubierta",
+        "keywords": ["techo", "lluvia", "chapas", "gotera", "cielorazo", "descascaramiento de pintura", "cubierta",
                     "teja", "cargas", "eflorecencia", "manchas oscuras", "canaleta", "terraza", "arriba", "azotea"],
         "categoria": "Filtracion por Cubierta / Techo",
         "solucion": "Impermeabilizacion y revision de cubierta.",
