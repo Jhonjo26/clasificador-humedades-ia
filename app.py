@@ -468,7 +468,7 @@ if diagnosticar:
         )
 
     except Exception as e:
-        st.error("Algo salio mal. Intenta de nuevo.")
+        st.error("Algo salio mal. Espera unos segundos.")
         with st.expander("Log tecnico"):
             st.code(str(e))
 
