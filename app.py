@@ -384,8 +384,14 @@ if diagnosticar:
             from PIL import Image
             client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
             analisis_partes = []
-            for foto in fotos:
+                for foto in fotos:
+                import io
                 imagen = Image.open(foto)
+                imagen.thumbnail((1024, 1024))
+                buf = io.BytesIO()
+                imagen.save(buf, format="JPEG", quality=70)
+                buf.seek(0)
+                imagen = Image.open(buf) 
                 for intento in range(3):
                     try:
                         respuesta = client.models.generate_content(
