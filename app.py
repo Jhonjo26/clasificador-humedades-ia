@@ -334,7 +334,7 @@ if descripcion.strip():
         if "fotos_guardadas" not in st.session_state:
             st.session_state.fotos_guardadas = []
         fotos_nuevas = st.file_uploader("Subi fotos del problema", type=["jpg","jpeg","png"], accept_multiple_files=True)
-       if fotos_nuevas:
+        if fotos_nuevas:
             st.session_state.fotos_guardadas = fotos_nuevas 
         fotos = st.session_state.fotos_guardadas
         if fotos:
