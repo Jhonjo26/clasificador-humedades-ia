@@ -334,8 +334,18 @@ if descripcion.strip():
         if "fotos_guardadas" not in st.session_state:
             st.session_state.fotos_guardadas = []
         fotos_nuevas = st.file_uploader("Subi fotos del problema", type=["jpg","jpeg","png"], accept_multiple_files=True)
-        if fotos_nuevas:
-            st.session_state.fotos_guardadas = fotos_nuevas
+       if fotos_nuevas:
+            from PIL import Image
+            import io
+            fotos_comprimidas = []
+            for f in fotos_nuevas:
+                img = Image.open(f)
+                img.thumbnail((1024, 1024))
+                buf = io.BytesIO()
+                img.save(buf, format="JPEG", quality=70)
+                buf.seek(0)
+                fotos_comprimidas.append(buf)
+            st.session_state.fotos_guardadas = fotos_comprimidas 
         fotos = st.session_state.fotos_guardadas
         if fotos:
             st.success(f"✅ {len(fotos)} foto(s) recibida(s).")
