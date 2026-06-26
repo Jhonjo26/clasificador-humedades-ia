@@ -468,6 +468,7 @@ if diagnosticar:
         st.markdown("<br>", unsafe_allow_html=True)
         st.download_button(
             label="Descargar informe completo",
+            type="primary",
             data=entrada["informe"],
             file_name=f"CasaSana_{nombre.replace(' ', '_')}_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}.txt",
             mime="text/plain",
