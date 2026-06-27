@@ -385,14 +385,14 @@ if diagnosticar:
             client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
             analisis_partes = []
             for foto in fotos:
-                import io
-                imagen = Image.open(foto)
-                imagen.thumbnail((1024, 1024))
-                buf = io.BytesIO()
-                imagen.save(buf, format="JPEG", quality=70)
-                buf.seek(0)
-                imagen = Image.open(buf) 
+                imagen = Image.open(foto) 
                 for intento in range(3):
+                    import io
+                    buf = io.BytesIO()
+                    imagen.thumbnail((1024, 1024))
+                    imagen.save(buf, format="JPEG", quality=70)
+                    buf.seek(0)
+                    imagen = Image.open(buf) 
                     try:
                         respuesta = client.models.generate_content(
                             model="gemini-2.5-flash",
