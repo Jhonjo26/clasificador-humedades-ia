@@ -99,13 +99,13 @@ st.markdown("""
     background-color: rgba(15,52,96,0.6) !important;
     border: 1px solid rgba(232,108,26,0.3) !important;
     border-radius: var(--radio) !important;
-    color: #F0EBE3 !important;
+    color: var(--texto) !important;
   }
   .stSelectbox > div > div {
     background-color: rgba(15,52,96,0.6) !important;
     border: 1px solid rgba(232,108,26,0.3) !important;
     border-radius: var(--radio) !important;
-    color: #F0EBE3 !important;
+    color: var(--texto) !important; 
   }
   .stSelectbox > div > div > div {
     background-color: #0F3460 !important;
